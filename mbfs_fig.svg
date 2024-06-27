@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="544" width="984" viewBox="0 0 984 544" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<path d="M 8,112 L 8,352" fill="none" stroke="black"/>
+<path d="M 32,144 L 32,176" fill="none" stroke="black"/>
+<path d="M 32,288 L 32,320" fill="none" stroke="black"/>
+<path d="M 80,80 L 80,104" fill="none" stroke="black"/>
+<path d="M 80,184 L 80,216" fill="none" stroke="black"/>
+<path d="M 80,240 L 80,280" fill="none" stroke="black"/>
+<path d="M 136,144 L 136,176" fill="none" stroke="black"/>
+<path d="M 136,288 L 136,320" fill="none" stroke="black"/>
+<path d="M 160,112 L 160,352" fill="none" stroke="black"/>
+<path d="M 448,16 L 448,432" fill="none" stroke="black"/>
+<path d="M 520,112 L 520,352" fill="none" stroke="black"/>
+<path d="M 544,144 L 544,176" fill="none" stroke="black"/>
+<path d="M 544,288 L 544,320" fill="none" stroke="black"/>
+<path d="M 592,16 L 592,56" fill="none" stroke="black"/>
+<path d="M 592,80 L 592,104" fill="none" stroke="black"/>
+<path d="M 592,184 L 592,216" fill="none" stroke="black"/>
+<path d="M 592,240 L 592,280" fill="none" stroke="black"/>
+<path d="M 648,144 L 648,176" fill="none" stroke="black"/>
+<path d="M 648,288 L 648,320" fill="none" stroke="black"/>
+<path d="M 672,112 L 672,352" fill="none" stroke="black"/>
+<path d="M 872,304 L 872,336" fill="none" stroke="black"/>
+<path d="M 912,344 L 912,384" fill="none" stroke="black"/>
+<path d="M 920,16 L 920,296" fill="none" stroke="black"/>
+<path d="M 960,344 L 960,432" fill="none" stroke="black"/>
+<path d="M 976,304 L 976,336" fill="none" stroke="black"/>
+<path d="M 592,16 L 920,16" fill="none" stroke="black"/>
+<path d="M 8,112 L 160,112" fill="none" stroke="black"/>
+<path d="M 520,112 L 672,112" fill="none" stroke="black"/>
+<path d="M 32,144 L 136,144" fill="none" stroke="black"/>
+<path d="M 544,144 L 648,144" fill="none" stroke="black"/>
+<path d="M 32,176 L 136,176" fill="none" stroke="black"/>
+<path d="M 544,176 L 648,176" fill="none" stroke="black"/>
+<path d="M 32,288 L 136,288" fill="none" stroke="black"/>
+<path d="M 544,288 L 648,288" fill="none" stroke="black"/>
+<path d="M 872,304 L 976,304" fill="none" stroke="black"/>
+<path d="M 32,320 L 136,320" fill="none" stroke="black"/>
+<path d="M 544,320 L 648,320" fill="none" stroke="black"/>
+<path d="M 872,336 L 976,336" fill="none" stroke="black"/>
+<path d="M 8,352 L 160,352" fill="none" stroke="black"/>
+<path d="M 520,352 L 672,352" fill="none" stroke="black"/>
+<path d="M 856,384 L 912,384" fill="none" stroke="black"/>
+<path d="M 856,432 L 960,432" fill="none" stroke="black"/>
+<polygon class="arrowhead" points="968,344 956,338.4 956,349.6" fill="black" transform="rotate(270,960,344)"/>
+<polygon class="arrowhead" points="920,344 908,338.4 908,349.6" fill="black" transform="rotate(270,912,344)"/>
+<polygon class="arrowhead" points="600,280 588,274.4 588,285.6" fill="black" transform="rotate(90,592,280)"/>
+<polygon class="arrowhead" points="600,216 588,210.4 588,221.6" fill="black" transform="rotate(90,592,216)"/>
+<polygon class="arrowhead" points="600,56 588,50.4 588,61.6" fill="black" transform="rotate(90,592,56)"/>
+<polygon class="arrowhead" points="88,280 76,274.4 76,285.6" fill="black" transform="rotate(90,80,280)"/>
+<polygon class="arrowhead" points="88,216 76,210.4 76,221.6" fill="black" transform="rotate(90,80,216)"/>
+<g class="text">
+<text x="80" y="68">t-lag, ..., t=0</text>
+<text x="228" y="68">Past Traffic</text>
+<text x="592" y="68">t-lag, ..., t=0</text>
+<text x="740" y="68">Past Traffic</text>
+<text x="52" y="84">N , ..</text>
+<text x="88" y="84">,</text>
+<text x="112" y="84">A</text>
+<text x="304" y="84">(Abnormal (A) / Normal (N))</text>
+<text x="560" y="84">N , ...</text>
+<text x="616" y="84">A</text>
+<text x="800" y="84">(Abnormal (A) / Normal (N))</text>
+<text x="36" y="132">MBFS</text>
+<text x="80" y="132">v</text>
+<text x="548" y="132">MBFS</text>
+<text x="592" y="132">v</text>
+<text x="84" y="164">Forecaster</text>
+<text x="596" y="164">Forecaster</text>
+<text x="88" y="228">t=0, ..., tstep</text>
+<text x="248" y="228">Predicted Traffic</text>
+<text x="600" y="228">t=0, ..., tstep</text>
+<text x="760" y="228">Predicted Traffic</text>
+<text x="52" y="244">p0, ..</text>
+<text x="88" y="244">,</text>
+<text x="128" y="244">pstep</text>
+<text x="240" y="244">(Probabilistic)</text>
+<text x="564" y="244">p0, ..</text>
+<text x="600" y="244">,</text>
+<text x="640" y="244">pstep</text>
+<text x="752" y="244">(Probabilistic)</text>
+<text x="84" y="308">Classifier</text>
+<text x="596" y="308">Classifier</text>
+<text x="924" y="324">Classifier</text>
+<text x="80" y="340">|</text>
+<text x="592" y="340">|</text>
+<text x="80" y="372">v</text>
+<text x="592" y="372">v</text>
+<text x="88" y="388">t=0, ..., tstep</text>
+<text x="248" y="388">Predicted Traffic</text>
+<text x="600" y="388">t=0, ..., tstep</text>
+<text x="760" y="388">Predicted Traffic</text>
+<text x="60" y="404">N , ...,</text>
+<text x="112" y="404">A</text>
+<text x="288" y="404">(Abnormal (A) / Normal (N))</text>
+<text x="572" y="404">N , ...,</text>
+<text x="624" y="404">A</text>
+<text x="800" y="404">(Abnormal (A) / Normal (N))</text>
+<text x="600" y="436">t=0, ..., tstep</text>
+<text x="756" y="436">Observer Traffic</text>
+</g>
+</svg>

@@ -1,0 +1,23 @@
+Prediction Time: tp
+t1 = t0 + steps - tp
+t2 = t1 + steps - tp
+
+t0                  t0 + steps
+|      steps        |
+ <----------------->                              Previous Prediction
+              t1      D
+              | tp  |<-->| 
+               <--->|    |                        Running the Next Prediction
+                    |    |      t1 + steps
+              |      steps      |
+               <--------------->                  Next Prediction
+                    |    t2
+                    |    |  tp |              
+                    |    |<--->|                  Running Next Next Prediction
+                    |    |                 t2 + steps
+                    |    |     steps       |
+                    |    |<--------------->|      Next Next Prediction
+                          ...
+
+D > 0 if t1 + steps - tp > t1 + tp, that is steps > 2 tp.  
+

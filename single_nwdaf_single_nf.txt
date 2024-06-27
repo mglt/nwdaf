@@ -1,0 +1,28 @@
+                                                         +------------------------+
+                                                         | Local NWDAF            |
+                                                         |         Model          |
+      +--------------------+                             |          |             |
+      | AMF                |                             | traffic  |             |
+      +--------------------+ NamfEventExposure_Subscribe |          V             |
+      | Namf_EventExposure |<----------------------------|     +------+           |
+      |                    | NamfEventExposure_Notify    |     |      | AMF Predicted Traffic
+      |                    |---------------------------->|.....| MBFS |      normal / abnormal
+      +--------------------+                             |     |      |..............
+                                                         |     |      |           |
+                                                         |     |      |           |
+                                                         |     +------+           |
+                                                         |                        |
+                                                         |                        |
+                                                         |                        |
+                                                         +------------------------+
+
+                          Single NWDAF monitoring with a single Network Function
+
+
+
+
+
+
+
+
+

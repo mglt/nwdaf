@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="632" viewBox="0 0 632 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<path d="M 72,32 L 72,48" fill="none" stroke="black"/>
+<path d="M 168,144 L 168,176" fill="none" stroke="black"/>
+<path d="M 168,216 L 168,304" fill="none" stroke="black"/>
+<path d="M 208,144 L 208,176" fill="none" stroke="black"/>
+<path d="M 208,240 L 208,304" fill="none" stroke="black"/>
+<path d="M 256,240 L 256,256" fill="none" stroke="black"/>
+<path d="M 352,288 L 352,304" fill="none" stroke="black"/>
+<path d="M 16,112 L 160,112" fill="none" stroke="black"/>
+<path d="M 176,144 L 200,144" fill="none" stroke="black"/>
+<path d="M 128,160 L 160,160" fill="none" stroke="black"/>
+<path d="M 128,208 L 256,208" fill="none" stroke="black"/>
+<path d="M 216,256 L 248,256" fill="none" stroke="black"/>
+<path d="M 216,304 L 344,304" fill="none" stroke="black"/>
+<polygon class="arrowhead" points="352,304 340,298.4 340,309.6" fill="black" transform="rotate(0,344,304)"/>
+<polygon class="arrowhead" points="264,208 252,202.4 252,213.6" fill="black" transform="rotate(0,256,208)"/>
+<polygon class="arrowhead" points="256,256 244,250.4 244,261.6" fill="black" transform="rotate(0,248,256)"/>
+<polygon class="arrowhead" points="224,304 212,298.4 212,309.6" fill="black" transform="rotate(180,216,304)"/>
+<polygon class="arrowhead" points="224,256 212,250.4 212,261.6" fill="black" transform="rotate(180,216,256)"/>
+<polygon class="arrowhead" points="208,144 196,138.4 196,149.6" fill="black" transform="rotate(0,200,144)"/>
+<polygon class="arrowhead" points="184,144 172,138.4 172,149.6" fill="black" transform="rotate(180,176,144)"/>
+<polygon class="arrowhead" points="168,160 156,154.4 156,165.6" fill="black" transform="rotate(0,160,160)"/>
+<polygon class="arrowhead" points="168,112 156,106.4 156,117.6" fill="black" transform="rotate(0,160,112)"/>
+<polygon class="arrowhead" points="136,208 124,202.4 124,213.6" fill="black" transform="rotate(180,128,208)"/>
+<polygon class="arrowhead" points="136,160 124,154.4 124,165.6" fill="black" transform="rotate(180,128,160)"/>
+<polygon class="arrowhead" points="24,112 12,106.4 12,117.6" fill="black" transform="rotate(180,16,112)"/>
+<g class="text">
+<text x="80" y="20">Prediction Time: tp</text>
+<text x="32" y="36">t1 = t0</text>
+<text x="124" y="36">steps - tp</text>
+<text x="32" y="52">t2 = t1</text>
+<text x="124" y="52">steps - tp</text>
+<text x="12" y="84">t0</text>
+<text x="204" y="84">t0 + steps</text>
+<text x="8" y="100">|</text>
+<text x="80" y="100">steps</text>
+<text x="168" y="100">|</text>
+<text x="480" y="116">Previous Prediction</text>
+<text x="124" y="132">t1</text>
+<text x="184" y="132">D</text>
+<text x="132" y="148">| tp</text>
+<text x="512" y="164">Running the Next Prediction</text>
+<text x="300" y="180">t1 + steps</text>
+<text x="120" y="196">|</text>
+<text x="192" y="196">steps</text>
+<text x="264" y="196">|</text>
+<text x="464" y="212">Next Prediction</text>
+<text x="212" y="228">t2</text>
+<text x="236" y="244">tp</text>
+<text x="516" y="260">Running Next Next Prediction</text>
+<text x="388" y="276">t2 + steps</text>
+<text x="272" y="292">steps</text>
+<text x="484" y="308">Next Next Prediction</text>
+<text x="224" y="324">...</text>
+<text x="232" y="356">D &gt; 0 if t1 + steps - tp &gt; t1 + tp, that is steps &gt; 2 tp.</text>
+</g>
+</svg>

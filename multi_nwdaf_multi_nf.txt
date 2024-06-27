@@ -1,0 +1,52 @@
+                                    Nnf Interface                                      Nnwdaf Interface
+
+     +--------------------+                              +------------------------+                                                +------------------------+
+     | AMF                |                              | Local NWDAF            |                     Nnwdaf_Analytics           | Aggregator NWDAF       |
+     +--------------------+ NamfEventExposure_Subscribe  |         Model <----------------------+       Subscription_Subscribe     |                        |
+     | Namf_EventExposure |<-----------------------------|          |             |             |      <---------------------------|                        |
+     |                    | NamfEventExposure_Notify     | traffic  |             |             |        (Data)                    |                        |
+     |                    |----------------------------->|...       V   AMF Predicted Traffic   |                                  |                        |
+     +--------------------+                              |  .  +------+      normal / abnormal  |       Nnwdaf_Analytics           |                        |
+                                                         |  .  |      |..............           |       Subscription_Notify        |       +------------+   |
+                                                         |  ...| MBFS |              |          |      --------------------------->|......>| Trained ML |-+ |
+     +--------------------+                              |  .  |      | SMF Predicted Traffic   |        (Data)                    |       | Model      | . |
+     | SMF                |                              |  .  |      |      normal / abnormal  |                                  |       +------------+ . |
+     +--------------------+ NsmfEventExposure_Subscribe  |  .  |      |..............           |                                  |                      . |
+     | Nsmf_EventExposure |<-----------------------------|. .  +------+           |             |                                  |                      . |
+     |                    | NsmfEventExposure_Notify     |                        |             |       Nnwdaf_Analytics           |                      .
+     |                    |----------------------------->|                        |             |       Subscription_Subscribe     |                      .
+     +--------------------+                              |                        |             |       -------------------------->|                      .
+                                                         +------------------------+             |       (Generic Model)            |                      .
+                                                                                                |                                  |                      .
+                                                                                                |       Nnwdaf_Analytics           |                      .
+                                                                                                |       Subscription_Notify        |                      .
+                                                                                                +----------------------------------|....................... |
+                                                         |                        |                     (Generic Model)            |                        |
+                                                         |                        |                                                |                        |
+                                                         +------------------------+                                                +------------------------+
+                                                         +------------------------+
+                                                         | Local NWDAF 2          |
+                                                         +------------------------+
+                                                           ...
+                                                         +------------------------+
+                                                         | Local NWDAF n          |
+                                                         +------------------------+
+
+
+                                                              Hierarchical NWDAF Monitoring Multiple Network Functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

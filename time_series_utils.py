@@ -239,8 +239,8 @@ class TimeSerieLagAnalysis:
 
     predictions_min = predictions.min() - threshold_step
     predictions_max = predictions.max() + threshold_step
-
-    y_true = self.data_test['y']
+    
+    y_true = self.data_test['y'][: len( predictions ) ]
 
     t_start = time.time()
     for threshold in threshold_list: 
@@ -458,6 +458,10 @@ class TimeSerieLagAnalysis:
     return selected_lag 
 
 
+
+
+
+
   def plot_thresholded_forecaster_evaluation( self, lag_min, lag_max, lag_step, 
           threshold_min=0, threshold_max=1, threshold_step=0.001, 
           test_step:int=None ):
@@ -554,8 +558,169 @@ class TimeSerieLagAnalysis:
     print( f"\nRejected Metrics (Too high variation):\n{txt_reject}" )
   
 
+##### Prediction
+
+  def plot_forecaster_prediction_steps( self, lag:int, \
+          test_steps_min:int=2,\
+          test_steps_max:int=None, test_steps_step:int=2,
+          threshold_min=0, threshold_max=1, threshold_step=0.001 ): 
+
+    """ Evaluates how much steps can be predicted """ 
+
+    model_metrics = [ 'pred_time', 'roc_auc', 'pr_auc', \
+                      'mean_sqrt', 'mean_abs', 'r2_score' ]
+
+    score_metrics = [ 'f1_binary', 'f1_micro', 'accuracy', \
+      'precision_binary', 'precision_micro',\
+      'average_precision_micro',  'recall_binary', 'recall_micro' ]
+    if test_steps_max is None:
+      test_steps_max = len( self.data_test )
+
+    test_steps_list = list( range( test_steps_min, test_steps_max + test_steps_step, test_steps_step ) )
+    
+    file_name = f"prediction_steps--{self.id}--lag-{lag}--steps-{test_steps_min}-{test_steps_max}-{test_steps_step}"
+
+    pickle_file =  os.path.join( self.output_dir , f"{file_name}.pickle" )
+    if os.path.isfile( pickle_file ) is True:
+      df = pd.read_pickle( pickle_file )
+    else: 
+      data_dict = {}
+
+      for m in model_metrics :
+        data_dict[ m ] = []
+      for m in score_metrics :
+        data_dict[ f"threshold_{m}" ] = []
+        data_dict[ f"score_{m}" ] = []
 
 
+      data_dict[ 'steps' ] = test_steps_list
+
+      full_y_pred, fit_time, pred_time, _ = self.get_prediction( lag )
+      for steps in test_steps_list:
+        y_true = self.data_test['y'][: steps ] 
+#        print( f"y_true: {y_true}" )
+        y_pred = full_y_pred[ : steps ]
+        data_dict[ 'pred_time' ].append( pred_time )
+        ## To be computed, y_pred requires at least two classes. This is not 
+        ## always met for small y_pred values. It could be also possible that
+        ## we start with a number of steps where at least y_pred has two 
+        ## distinct values.
+        try:
+          data_dict[ 'roc_auc' ].append( sklearn.metrics.roc_auc_score( y_true, y_pred) )
+        except:
+          data_dict[ 'roc_auc' ] = -1    
+        precision, recall, threshold = sklearn.metrics.precision_recall_curve(y_true, y_pred )  
+        data_dict[ 'pr_auc' ].append( sklearn.metrics.auc( recall, precision ) )
+        data_dict[ 'mean_sqrt' ].append( sklearn.metrics.mean_squared_error( y_true, y_pred ) )
+        data_dict[ 'mean_abs' ].append( sklearn.metrics.mean_absolute_error( y_true, y_pred ) )
+        data_dict[ 'r2_score' ].append( sklearn.metrics.r2_score( y_true, y_pred )  )
+        prediction_id = f"tuned_thresholded_prediction--lag-{lag}--steps{steps}"
+        for metric in score_metrics:
+          threshold, min_error = self.get_optimum_threshold( y_pred, 
+                  metric=metric, prediction_id=prediction_id, 
+                  threshold_min=threshold_min, 
+                  threshold_max=threshold_max,\
+                  threshold_step=threshold_step )
+          data_dict[ f"threshold_{metric}" ].append( threshold )   
+          data_dict[ f"score_{metric}" ].append( min_error ) 
+
+      df = pd.DataFrame( data_dict )  
+      df.to_pickle( pickle_file )
+
+
+    svg_fn =  os.path.join( self.output_dir , f"{file_name}.svg" )
+    if os.path.isfile( svg_fn ) is False:
+#      if test_steps is not None:
+#        df = df[ : test_step ]    
+
+      fig, axes = plt.subplots( figsize=(16, 10), nrows=4, ncols=1 ) 
+      fig.suptitle( 'Evaluation of Predicted Steps' )  
+      x = df[ 'steps' ].to_list()  
+      axes[ 0 ].plot( x, df[ f"roc_auc" ], label="ROC AUC" )
+      axes[ 0 ].plot( x, df[ f"pr_auc" ], label="PR AUC" )
+      axes[ 0 ].set(xlabel='Lags', ylabel='AUC')          
+      axes[ 0 ].set_title( 'ROC AUC and Precision Recall AUC versus Predicted Steps')  
+      axes[ 0 ].legend()
+      axes[ 1 ].plot( x, df[ f"mean_sqrt" ], label="Mean Square Error" )
+      axes[ 1 ].plot( x, df[ f"mean_abs" ], label="Mean Absolute Error" )
+      axes[ 1 ].plot( x, df[ f"r2_score" ], label="R2 Score" )
+      axes[ 1 ].set(xlabel='Predicted Steps', ylabel='Error')          
+      axes[ 1 ].set_title( 'Error')  
+      axes[ 1 ].legend()
+      for metric in score_metrics:
+        axes[ 2 ].plot( x, df[ f"score_{metric}" ], label=metric)
+        axes[ 2 ].set_title( 'Scores With Optimum Threshold For Individual Predicted Steps')  
+        axes[ 2 ].legend( loc='center left', bbox_to_anchor=(1, 0.5) )
+        axes[ 2 ].set(xlabel='Predicted Steps', ylabel= 'Score')  
+      for metric in score_metrics:
+        axes[ 3 ].plot( x, df[ f"threshold_{metric}" ], label=metric)
+        axes[ 3 ].set_title( 'Optimum Threshold versus Lag')  
+        axes[ 3 ].legend( loc='center left', bbox_to_anchor=(1, 0.5) )
+        axes[ 3 ].set(xlabel='Predicted Steps', ylabel= 'Threshold')  
+      plt.subplots_adjust(left=0.125, right=0.9, bottom=0.1, top=0.9, hspace=0.4)  
+
+      fig.savefig( svg_fn )
+    return df, svg_fn
+
+  def plot_forecaster_score_versus_threshold( self, lag, steps=None, 
+          threshold_min=0, threshold_max=1, threshold_step=0.001 ): 
+
+    score_metrics = [ 'f1_binary', 'f1_micro', 'accuracy', \
+      'precision_binary', 'precision_micro',\
+      'average_precision_micro',  'recall_binary', 'recall_micro' ]
+    file_name = f"threshold--{self.id}--steps-{steps}--lag-{lag}--threshold-{threshold_min}-{threshold_max}-{threshold_step}"
+    print( file_name )
+    pickle_file =  os.path.join( self.output_dir , f"{file_name}.pickle" )
+    if os.path.isfile( pickle_file ) is True:
+      df = pd.read_pickle( pickle_file )
+    else: 
+      data_dict = {}
+      threshold_list = np.arange( threshold_min, threshold_max, threshold_step )
+
+      data_dict[ 'threshold' ] = threshold_list
+      for m in score_metrics :
+        data_dict[ m ] = []
+
+      y_pred_float, fit_time, pred_time, _ = self.get_prediction( lag )
+      y_true = self.data_test['y']
+      if steps is not None:
+        y_pred_float = y_pred[ : steps ]
+        y_true = y_true[ : steps ]
+      for threshold in threshold_list:
+        ## building a thresholded_prediction  
+        y_pred = y_pred_float.between( float( threshold ), float( 1 ), inclusive='right' ).map( {True: 1, False: 0} )
+        data_dict[ 'f1_binary' ].append( sklearn.metrics.f1_score( y_true, 
+            y_pred, average='binary', pos_label=1) )
+        data_dict[ 'f1_micro' ].append( sklearn.metrics.f1_score( y_true, 
+            y_pred, average='micro' ) )
+        data_dict[ 'accuracy' ].append( sklearn.metrics.accuracy_score( y_true, y_pred ) )
+        data_dict[ 'precision_binary' ].append( sklearn.metrics.precision_score( y_true, 
+            y_pred, average='binary', pos_label=1 ) )
+        data_dict[ 'precision_micro' ].append( sklearn.metrics.precision_score( y_true, 
+            y_pred, average='micro' ) )
+        data_dict[ 'average_precision_micro' ].append( sklearn.metrics.average_precision_score( 
+            y_true, y_pred, average='micro' ) )
+        data_dict[ 'recall_binary' ].append( sklearn.metrics.recall_score( y_true, 
+            y_pred, pos_label=1, average='binary' ) )
+        data_dict[ 'recall_micro' ].append( sklearn.metrics.recall_score( y_true, 
+            y_pred, average='micro' ) )
+      df = pd.DataFrame( data_dict )  
+      df.to_pickle( pickle_file )
+
+    fig = px.line( x=df[ "threshold" ], y=df[ "f1_binary" ] )
+    fig['data'][0]['showlegend']=True
+    fig['data'][0]['name']='f1_binary'
+    for m in score_metrics[ 1 : ]:
+      fig.add_scatter(x=df[ "threshold" ], y=df[ m ],name=m )
+    fig.update_layout( 
+      title=f"Score evolution according to Threshold - "\
+              f"{self.regressor.__class__.__name__}/{self.forecaster} with lag={lag}",
+      xaxis_title='Threshold',
+      yaxis_title=f'Score')
+    fig.show()
+    return df
+
+####
   def plot_lag_predictions( self, lag_list, metric_list=[], test_len=None ):
 
 #    metric_label_list = self.get_metric_label_list( 'error_and_score' ) 
@@ -601,7 +766,7 @@ class TimeSerieLagAnalysis:
 
 if __name__ == "__main__":
   ### Analysing (Forecaster, regressor) for different lag values 
-  SELECT_LAG = True
+  SELECT_LAG = False
   if SELECT_LAG is True:
     cell_id=0
     cat_id=0
@@ -638,9 +803,61 @@ if __name__ == "__main__":
     lag_min = 2
     lag_max = 800
     lag_step = 2
-    df_score, svg = forecaster_eval.plot_thresholded_forecaster_evaluation( lag_min, lag_max, lag_step, 
+    df_score, svg = forecaster_eval.plot_thresholded_forecaster_evaluation( \
+            lag_min, lag_max, lag_step, 
             threshold_min=0, threshold_max=1, threshold_step=0.001, 
             test_step=None )
     sub_df_score = df_score[ ( df_score[ 'lag' ] >= selected_lag - delta_lag ) & ( df_score['lag'] <= selected_lag + delta_lag ) ]
-  print_mMm_scores( sub_df_score, threshold_var=0.25, score_var=0.25 )
+    print_mMm_scores( sub_df_score, threshold_var=0.25, score_var=0.25 )
 
+  PREDICTED_STEPS = True
+  if PREDICTED_STEPS is True:
+    cell_id=0
+    cat_id=0 
+    pe_id=0 
+    
+    # formating the dataset
+    data = NWDAFDataSet ( cell_id=cell_id, cat_id=cat_id, pe_id=pe_id )
+    train_len = int( 80 * len( data.df ) / 100 )  
+    test_len = len( data.df ) - train_len
+    
+    
+    lag = 94
+    test_steps_min=1350
+    test_steps_max=2000
+    regressor = sklearn.ensemble.RandomForestRegressor(\
+                      random_state=123,
+                      n_estimators=100,
+                      max_depth=10 )
+#    regressor = sklearn.linear_model.Ridge(random_state=123)
+
+    forecaster_eval = TimeSerieLagAnalysis( data, train_len, regressor,
+                                              forecaster = 'ForecasterAutoreg')
+    forecaster_eval = TimeSerieLagAnalysis( data, train_len, regressor,
+                                              forecaster = 'ForecasterAutoregWithExog')
+    df, svg_fn = forecaster_eval.plot_forecaster_prediction_steps(lag=lag, test_steps_min=test_steps_min, test_steps_max=test_steps_max)
+
+  THRESHOLD = False
+  if THRESHOLD is True:
+    cell_id=0
+    cat_id=0 
+    pe_id=0 
+    
+    # formating the dataset
+    data = NWDAFDataSet ( cell_id=cell_id, cat_id=cat_id, pe_id=pe_id )
+    train_len = int( 80 * len( data.df ) / 100 )  
+    test_len = len( data.df ) - train_len
+    
+    
+    lag = 94
+    regressor = sklearn.ensemble.RandomForestRegressor(\
+                      random_state=123,
+                      n_estimators=100,
+                      max_depth=10 )
+    regressor = sklearn.linear_model.Ridge(random_state=123)
+
+    forecaster_eval = TimeSerieLagAnalysis( data, train_len, regressor,
+                                              forecaster = 'ForecasterAutoreg')
+    forecaster_eval = TimeSerieLagAnalysis( data, train_len, regressor,
+                                              forecaster = 'ForecasterAutoregWithExog')
+    df = forecaster_eval.plot_forecaster_score_versus_threshold( lag=lag, steps=None )

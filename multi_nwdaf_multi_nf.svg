@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="864" width="1224" viewBox="0 0 1224 864" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<path d="M 8,48 L 8,144" fill="none" stroke="black"/>
+<path d="M 8,192 L 8,288" fill="none" stroke="black"/>
+<path d="M 176,48 L 176,144" fill="none" stroke="black"/>
+<path d="M 176,192 L 176,288" fill="none" stroke="black"/>
+<path d="M 424,48 L 424,304" fill="none" stroke="black"/>
+<path d="M 424,384 L 424,464" fill="none" stroke="black"/>
+<path d="M 424,496 L 424,528" fill="none" stroke="black"/>
+<path d="M 472,144 L 472,240" fill="none" stroke="black"/>
+<path d="M 512,96 L 512,136" fill="none" stroke="black"/>
+<path d="M 528,144 L 528,240" fill="none" stroke="black"/>
+<path d="M 624,48 L 624,72" fill="none" stroke="black"/>
+<path d="M 624,88 L 624,112" fill="none" stroke="black"/>
+<path d="M 624,224 L 624,304" fill="none" stroke="black"/>
+<path d="M 624,384 L 624,464" fill="none" stroke="black"/>
+<path d="M 624,496 L 624,528" fill="none" stroke="black"/>
+<path d="M 736,80 L 736,368" fill="none" stroke="black"/>
+<path d="M 1016,48 L 1016,416" fill="none" stroke="black"/>
+<path d="M 1080,160 L 1080,208" fill="none" stroke="black"/>
+<path d="M 1184,160 L 1184,208" fill="none" stroke="black"/>
+<path d="M 1216,48 L 1216,240" fill="none" stroke="black"/>
+<path d="M 1216,368 L 1216,416" fill="none" stroke="black"/>
+<path d="M 8,48 L 176,48" fill="none" stroke="black"/>
+<path d="M 424,48 L 624,48" fill="none" stroke="black"/>
+<path d="M 1016,48 L 1216,48" fill="none" stroke="black"/>
+<path d="M 8,80 L 176,80" fill="none" stroke="black"/>
+<path d="M 552,80 L 736,80" fill="none" stroke="black"/>
+<path d="M 184,96 L 416,96" fill="none" stroke="black"/>
+<path d="M 792,96 L 1008,96" fill="none" stroke="black"/>
+<path d="M 184,128 L 416,128" fill="none" stroke="black"/>
+<path d="M 8,144 L 176,144" fill="none" stroke="black"/>
+<path d="M 472,144 L 528,144" fill="none" stroke="black"/>
+<path d="M 1080,160 L 1184,160" fill="none" stroke="black"/>
+<path d="M 792,176 L 1008,176" fill="none" stroke="black"/>
+<path d="M 8,192 L 176,192" fill="none" stroke="black"/>
+<path d="M 1080,208 L 1184,208" fill="none" stroke="black"/>
+<path d="M 8,224 L 176,224" fill="none" stroke="black"/>
+<path d="M 184,240 L 416,240" fill="none" stroke="black"/>
+<path d="M 472,240 L 528,240" fill="none" stroke="black"/>
+<path d="M 184,272 L 416,272" fill="none" stroke="black"/>
+<path d="M 8,288 L 176,288" fill="none" stroke="black"/>
+<path d="M 800,288 L 1008,288" fill="none" stroke="black"/>
+<path d="M 424,304 L 624,304" fill="none" stroke="black"/>
+<path d="M 736,368 L 1008,368" fill="none" stroke="black"/>
+<path d="M 424,416 L 624,416" fill="none" stroke="black"/>
+<path d="M 1016,416 L 1216,416" fill="none" stroke="black"/>
+<path d="M 424,432 L 624,432" fill="none" stroke="black"/>
+<path d="M 424,464 L 624,464" fill="none" stroke="black"/>
+<path d="M 424,496 L 624,496" fill="none" stroke="black"/>
+<path d="M 424,528 L 624,528" fill="none" stroke="black"/>
+<polygon class="arrowhead" points="1016,288 1004,282.4 1004,293.6" fill="black" transform="rotate(0,1008,288)"/>
+<polygon class="arrowhead" points="1016,176 1004,170.4 1004,181.6" fill="black" transform="rotate(0,1008,176)"/>
+<polygon class="arrowhead" points="800,96 788,90.4 788,101.6" fill="black" transform="rotate(180,792,96)"/>
+<polygon class="arrowhead" points="560,80 548,74.4 548,85.6" fill="black" transform="rotate(180,552,80)"/>
+<polygon class="arrowhead" points="520,136 508,130.4 508,141.6" fill="black" transform="rotate(90,512,136)"/>
+<polygon class="arrowhead" points="424,272 412,266.4 412,277.6" fill="black" transform="rotate(0,416,272)"/>
+<polygon class="arrowhead" points="424,128 412,122.4 412,133.6" fill="black" transform="rotate(0,416,128)"/>
+<polygon class="arrowhead" points="192,240 180,234.4 180,245.6" fill="black" transform="rotate(180,184,240)"/>
+<polygon class="arrowhead" points="192,96 180,90.4 180,101.6" fill="black" transform="rotate(180,184,96)"/>
+<g class="text">
+<text x="304" y="20">Nnf Interface</text>
+<text x="724" y="20">Nnwdaf Interface</text>
+<text x="32" y="68">AMF</text>
+<text x="480" y="68">Local NWDAF</text>
+<text x="860" y="68">Nnwdaf_Analytics</text>
+<text x="1092" y="68">Aggregator NWDAF</text>
+<text x="296" y="84">NamfEventExposure_Subscribe</text>
+<text x="520" y="84">Model</text>
+<text x="884" y="84">Subscription_Subscribe</text>
+<text x="92" y="100">Namf_EventExposure</text>
+<text x="284" y="116">NamfEventExposure_Notify</text>
+<text x="464" y="116">traffic</text>
+<text x="828" y="116">(Data)</text>
+<text x="440" y="132">...</text>
+<text x="624" y="132">AMF Predicted Traffic</text>
+<text x="448" y="148">.</text>
+<text x="648" y="148">normal / abnormal</text>
+<text x="860" y="148">Nnwdaf_Analytics</text>
+<text x="448" y="164">.</text>
+<text x="588" y="164">..............</text>
+<text x="872" y="164">Subscription_Notify</text>
+<text x="456" y="180">...</text>
+<text x="500" y="180">MBFS</text>
+<text x="648" y="180">|</text>
+<text x="1048" y="180">......&gt;</text>
+<text x="1132" y="180">Trained ML</text>
+<text x="1196" y="180">-+</text>
+<text x="448" y="196">.</text>
+<text x="624" y="196">SMF Predicted Traffic</text>
+<text x="828" y="196">(Data)</text>
+<text x="1112" y="196">Model</text>
+<text x="1200" y="196">.</text>
+<text x="32" y="212">SMF</text>
+<text x="448" y="212">.</text>
+<text x="648" y="212">normal / abnormal</text>
+<text x="1200" y="212">.</text>
+<text x="296" y="228">NsmfEventExposure_Subscribe</text>
+<text x="448" y="228">.</text>
+<text x="576" y="228">...........</text>
+<text x="636" y="228">..</text>
+<text x="1200" y="228">.</text>
+<text x="92" y="244">Nsmf_EventExposure</text>
+<text x="440" y="244">. .</text>
+<text x="1200" y="244">.</text>
+<text x="284" y="260">NsmfEventExposure_Notify</text>
+<text x="860" y="260">Nnwdaf_Analytics</text>
+<text x="1200" y="260">.</text>
+<text x="884" y="276">Subscription_Subscribe</text>
+<text x="1200" y="276">.</text>
+<text x="1200" y="292">.</text>
+<text x="856" y="308">(Generic Model)</text>
+<text x="1200" y="308">.</text>
+<text x="1200" y="324">.</text>
+<text x="860" y="340">Nnwdaf_Analytics</text>
+<text x="1200" y="340">.</text>
+<text x="872" y="356">Subscription_Notify</text>
+<text x="1200" y="356">.</text>
+<text x="1112" y="372">.......................</text>
+<text x="856" y="388">(Generic Model)</text>
+<text x="488" y="452">Local NWDAF 2</text>
+<text x="448" y="484">...</text>
+<text x="488" y="516">Local NWDAF n</text>
+<text x="684" y="580">Hierarchical NWDAF Monitoring Multiple Network Functions</text>
+</g>
+</svg>

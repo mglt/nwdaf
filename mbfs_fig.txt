@@ -1,0 +1,32 @@
+                                                        |                 +----------------------------------------+
+                                                        |                 |                                        |
+                                                        |                 v                                        |
+   t-lag, ..., t=0     Past Traffic                     |          t-lag, ..., t=0     Past Traffic                |
+    N , ...,  A          (Abnormal (A) / Normal (N))    |          N , ...,  A         (Abnormal (A) / Normal (N)) |
+          |                                             |                 |                                        |
+ +------------------+                                   |        +------------------+                              |
+ | MBFS   v         |                                   |        | MBFS   v         |                              |
+ |  +------------+  |                                   |        |  +------------+  |                              |
+ |  | Forecaster |  |                                   |        |  | Forecaster |  |                              |
+ |  +------------+  |                                   |        |  +------------+  |                              |
+ |        |         |                                   |        |        |         |                              |
+ |        v         |                                   |        |        v         |                              |
+ |  t=0, ..., tstep |  Predicted Traffic                |        |  t=0, ..., tstep |  Predicted Traffic           |
+ |  p0, ...,  pstep |  (Probabilistic)                  |        |  p0, ...,  pstep |  (Probabilistic)             |
+ |        |         |                                   |        |        |         |                              |
+ |        v         |                                   |        |        v         |                              |
+ |  +------------+  |                                   |        |  +------------+  |                              |
+ |  | Classifier |  |                                   |        |  | Classifier |  |                        +------------+
+ |  +------------+  |                                   |        |  +------------+  |                        | Classifier |
+ |        |         |                                   |        |        |         |                        +------------+
+ +------------------+                                   |        +------------------+                             ^     ^
+          v                                             |                 v                                       |     |
+    t=0, ..., tstep    Predicted Traffic                |           t=0, ..., tstep    Predicted Traffic   -------+     |
+    N , ...,  A        (Abnormal (A) / Normal (N))      |           N , ...,  A        (Abnormal (A) / Normal (N))      |
+                                                        |                                                               |
+                                                        |           t=0, ..., tstep    Observer Traffic    -------------+
+
+
+
+
+
